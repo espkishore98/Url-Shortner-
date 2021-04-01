@@ -3,6 +3,7 @@ package com.shortner.service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shortner.domain.ResponseObject;
+import com.shortner.domain.UpdateRequest;
 import com.shortner.domain.UserSpecificShort;
 
 public interface ShortnerService {
@@ -11,6 +12,10 @@ public interface ShortnerService {
 
 	ResponseObject userSpecificName(UserSpecificShort specificShort, String auth);
 
-	String readByColumnName(MultipartFile file, String auth);
+	ResponseObject editShortUrl(UpdateRequest shortUrl, String auth);
+
+	ResponseObject getAllUrlDetails(String auth);
+
+	
 
 }

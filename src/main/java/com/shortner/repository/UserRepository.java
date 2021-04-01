@@ -12,5 +12,7 @@ public interface UserRepository extends JpaRepository<com.shortner.domain.User, 
 
 	@Query(value = "select u from User u where u.emailId=:emailId", nativeQuery = false)
 	public User userLoginWithEmail(String emailId);
+	
+
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shortner.domain.ResponseObject;
+import com.shortner.domain.UpdateRequest;
 import com.shortner.domain.UserSpecificShort;
 import com.shortner.repository.ShorterRepository;
 import com.shortner.service.ShortnerService;
@@ -41,12 +42,17 @@ public class ShorterController {
 	public void RedirectToLong(HttpServletResponse response, @PathVariable String randomString) throws IOException {
 		response.sendRedirect(shortRepo.getuserBasedOnRandom(randomString));
 		// return "redirect:" + shortRepo.getuserBasedOnRandom(randomString);
-
 	}
 
-	@PostMapping("/ListShort")
-	public String listOfShort(MultipartFile file, @RequestHeader("Authorization") String auth) {
-		return shortnerService.readByColumnName(file, auth);
+	@GetMapping("/getAllUserUrls")
+	public ResponseObject getAllUrls(@RequestHeader("Authorization") String auth) {
+		return shortnerService.getAllUrlDetails(auth);
 	}
 
+	@PostMapping("/editShortUrl")
+	public ResponseObject editShortUrl(@RequestHeader("Authorization") String auth,
+			@RequestBody UpdateRequest updateRequest) {
+		return shortnerService.editShortUrl(updateRequest, auth);
+
+	}
 }
